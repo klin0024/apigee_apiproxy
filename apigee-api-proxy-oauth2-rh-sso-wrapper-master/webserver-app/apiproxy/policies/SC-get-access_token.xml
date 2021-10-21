@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="SC-get-access_token">
+    <DisplayName>SC-get-access_token</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Request clearPayload="true" variable="calloutRequest">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>calloutResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://{oauth2.host}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>
+

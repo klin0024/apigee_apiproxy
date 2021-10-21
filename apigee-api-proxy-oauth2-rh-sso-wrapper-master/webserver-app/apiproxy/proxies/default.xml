@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description/>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <FaultRules/>
+                <Name>AM-set-var</Name>
+            </Step>
+        </Request>
+        <Response/>
+        <Response/>
+    </PreFlow>
+    <Flows>
+        <Flow name="callback">
+            <Description/>
+            <Request>
+                <Step>
+                    <FaultRules/>
+                    <Name>BA-appKey-appSecret</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>AM-set-authorization_code</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>SC-get-access_token</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>EV-get-token</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <FaultRules/>
+                    <Name>AM-redirect</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/callback") and (request.queryparam.code != null) and (request.verb =="GET")</Condition>
+        </Flow>
+        <Flow name="get_resource">
+            <Description/>
+            <Request>
+                <Step>
+                    <FaultRules/>
+                    <Name>AM-set-token</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>SC-get-resource</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>EV-set-msg</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>AM-return-resource</Name>
+                    <Condition>(calloutResponse.status.code == 200)</Condition>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/") and (request.queryparam.access_token != null) and (request.verb =="GET")</Condition>
+        </Flow>
+        <Flow name="index">
+            <Description/>
+            <Request/>
+            <Response>
+                <Step>
+                    <FaultRules/>
+                    <Name>AM-index</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/") and (request.verb == "GET")</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/v1/web</BasePath>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="noroute"/>
+</ProxyEndpoint>

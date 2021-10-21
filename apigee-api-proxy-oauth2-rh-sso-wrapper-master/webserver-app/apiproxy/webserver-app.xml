@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="2" name="webserver-app">
+    <ConfigurationVersion minorVersion="0" majorVersion="4"/>
+    <CreatedAt>1401848913940</CreatedAt>
+    <CreatedBy>mrusso+oauth@apigee.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>webserver-app</DisplayName>
+    <LastModifiedAt>1401852981846</LastModifiedAt>
+    <LastModifiedBy>mrusso+oauth@apigee.com</LastModifiedBy>
+    <Policies>
+        <Policy>AM-index</Policy>
+        <Policy>AM-redirect</Policy>
+        <Policy>AM-return-resource</Policy>
+        <Policy>AM-set-authorization_code</Policy>
+        <Policy>AM-set-token</Policy>
+        <Policy>AM-set-var</Policy>
+        <Policy>BA-appKey-appSecret</Policy>
+        <Policy>EV-get-token</Policy>
+        <Policy>EV-set-msg</Policy>
+        <Policy>SC-get-access_token</Policy>
+        <Policy>SC-get-resource</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <TargetServers/>
+    <TargetEndpoints/>
+    <validate>false</validate>
+</APIProxy>

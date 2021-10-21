@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="JS-refresh_token-body">
+    <DisplayName>JS-refresh_token-body</DisplayName>
+    <Properties/>
+    <ResourceURL>jsc://refresh_token-body.js</ResourceURL>
+</Javascript>

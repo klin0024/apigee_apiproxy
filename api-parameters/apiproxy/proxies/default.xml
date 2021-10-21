@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow name="PreFlow">
+        <Request/>
+        <Response/>
+    </PreFlow>
+    <Flows>
+        <Flow name="request">
+            <Request>
+                <Step>
+                    <Name>RF-400</Name>
+                    <Condition>(request.queryparam.para is null)</Condition>
+                </Step>
+            </Request>
+            <Condition>(proxy.pathsuffix MatchesPath "/queryparam")  and (request.verb equals "GET")</Condition>
+        </Flow>
+        <Flow name="message">
+            <Request>
+                <Step>
+                    <Name>RF-400</Name>
+                    <Condition>(request.formparam.para is null)</Condition>
+                </Step>
+            </Request>
+            <Condition>(proxy.pathsuffix MatchesPath "/formparam")  and ( request.verb equals "POST" )</Condition>
+        </Flow>
+        <Flow name="header">
+            <Request>
+                <Step>
+                    <Name>RF-400</Name>
+                    <Condition>(request.header.para is null)</Condition>
+                </Step>
+            </Request>
+            <Condition>(proxy.pathsuffix MatchesPath "/header")</Condition>
+        </Flow>
+        <Flow name="default">
+            <Request>
+                <Step>
+                    <Name>RF-404</Name>
+                </Step>
+            </Request>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/test</BasePath>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>

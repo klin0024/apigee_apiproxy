@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-set-authorization_code">
+    <DisplayName>AM-set-authorization_code</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Set>
+        <Headers>
+            <Header name="Authorization">{appCredentials}</Header>
+            <Header name="Accept">application/json</Header>
+        </Headers>
+        <FormParams>
+            <FormParam name="grant_type">authorization_code</FormParam>
+            <FormParam name="code">{request.queryparam.code}</FormParam>
+            <FormParam name="redirect_uri">{app.protocol}://{app.host}{app.callback}</FormParam>
+            <FormParam name="client_id">{appKey}</FormParam>
+            <FormParam name="client_secret">{appSecret}</FormParam>
+            <FormParam name="state">{oauth2.state}</FormParam>
+            <FormParam name="scope">{oauth2.scope}</FormParam>
+        </FormParams>
+        <Verb>POST</Verb>
+        <Path>{oauth2.token}</Path>>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo type="request" transport="http" createNew="true">calloutRequest</AssignTo>
+</AssignMessage>
+

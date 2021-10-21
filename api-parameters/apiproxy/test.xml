@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="test">
+    <Basepaths>/test</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1634289807381</CreatedAt>
+    <CreatedBy>shuhsien.lin@ikala.tv</CreatedBy>
+    <Description></Description>
+    <DisplayName>test</DisplayName>
+    <HostedManifestVersion>SHA-512:be667c1625d200c67210d37b4bc3ebe44ece924e455e366c6a9177dd7c66153e75ac59d228f1388cc28bf3995dd3cc9f837f958cc7dcdfc83a0fe91b151cef6d:ap-northeast-1</HostedManifestVersion>
+    <LastModifiedAt>1634303901387</LastModifiedAt>
+    <LastModifiedBy>shuhsien.lin@ikala.tv</LastModifiedBy>
+    <ManifestVersion>SHA-512:7baf2089af71fdec29d10628057526dce1204b42ba03a657f70afe680d05eb9f9d094f0771de5a50c0fb5d2ec372fdff16b67325d37a39678c4df956c79494ca:ap-northeast-1</ManifestVersion>
+    <Policies>
+        <Policy>RF-400</Policy>
+        <Policy>RF-404</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>hosted://app.yaml</Resource>
+        <Resource>hosted://index.js</Resource>
+        <Resource>hosted://package.json</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

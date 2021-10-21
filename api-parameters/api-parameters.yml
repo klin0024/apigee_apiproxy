@@ -1,0 +1,42 @@
+swagger: '2.0'
+info:
+  description: 'test'
+  version: 1.0.0
+  title: TEST API
+host: euw1-partner09-test.apigee.net
+basePath: /test
+schemes:
+  - https
+paths:
+  /queryparam:
+    get:
+      parameters:
+        - name: para
+          in: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+  /formparam:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: para
+          in: formData
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+  /header:
+    get:
+      parameters:
+        - name: para
+          in: header
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Success

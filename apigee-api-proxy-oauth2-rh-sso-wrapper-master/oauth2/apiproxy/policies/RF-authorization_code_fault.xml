@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault async="false" continueOnError="false" enabled="true" name="RF-authorization_code_fault">
+    <DisplayName>RF-authorization_code_fault</DisplayName>
+    <Properties/>
+    <FaultResponse>
+        <Copy source="calloutResponse">
+            <Payload/>
+            <StatusCode/>
+            <ReasonPhrase/>
+        </Copy>
+        <Set>
+            <ReasonPhrase>Identity Provider Token Endpoint Error</ReasonPhrase>
+        </Set>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>

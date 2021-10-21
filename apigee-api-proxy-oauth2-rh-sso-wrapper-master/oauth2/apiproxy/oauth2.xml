@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="17" name="blog-rh-sso-integration">
+    <Basepaths>/oauth/identity</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1515344505295</CreatedAt>
+    <CreatedBy>robert.broeckelmann@rcbjconsulting.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>OAuth2 Wrapper</DisplayName>
+    <LastModifiedAt>1516573431289</LastModifiedAt>
+    <LastModifiedBy>robert.broeckelmann@rcbjconsulting.com</LastModifiedBy>
+    <Policies>
+        <Policy>AM-authorize</Policy>
+        <Policy>AM-set-authorization_code-var</Policy>
+        <Policy>AM-set-client_credentials-var</Policy>
+        <Policy>EV-get-authorization_code-var</Policy>
+        <Policy>EV-get-client_credentials-var</Policy>
+        <Policy>EV-get-refresh_token-var</Policy>
+        <Policy>EV-set_authorization_code-param</Policy>
+        <Policy>EV-set-client_credentials-param</Policy>
+        <Policy>EV-set-refresh_token-param</Policy>
+        <Policy>EV-set-userinfo</Policy>
+        <Policy>JS-refresh_token-body</Policy>
+        <Policy>KVM-get_configuration</Policy>
+        <Policy>OA-gen-access_token-authorization_code</Policy>
+        <Policy>OA-gen-access_token-client_credentials</Policy>
+        <Policy>OA-gen-authorization_code</Policy>
+        <Policy>OA-refresh_token</Policy>
+        <Policy>RF-authorization_code_fault</Policy>
+        <Policy>RF-client_credentials-fault</Policy>
+        <Policy>RF-get-userinfo-fault</Policy>
+        <Policy>RF-refresh_token_fault</Policy>
+        <Policy>SC-get-token-authorization_code</Policy>
+        <Policy>SC-get-token-client_credentials</Policy>
+        <Policy>SC-get-userinfo</Policy>
+        <Policy>SC-refresh_token</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://refresh_token-body.js</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <validate>false</validate>
+</APIProxy>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description/>
+    <FaultRules/>
+    <Flows>
+        <Flow name="authorize">
+            <Description>authorize</Description>
+            <Request/>
+            <Response>
+                <Step>
+                    <Name>KVM-get_configuration</Name>
+                </Step>
+                <Step>
+                    <Name>AM-authorize</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/authorize") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="token-authorization_code">
+            <Description>token-authorization_code</Description>
+            <Request>
+                <Step>
+                    <Name>KVM-get_configuration</Name>
+                </Step>
+                <Step>
+                    <Name>EV-set_authorization_code-param</Name>
+                </Step>
+                <Step>
+                    <Name>SC-get-token-authorization_code</Name>
+                </Step>
+                <Step>
+                    <Name>EV-get-authorization_code-var</Name>
+                </Step>
+                <Step>
+                    <Name>RF-authorization_code_fault</Name>
+                    <Condition>calloutResponse.status.code != 200</Condition>
+                </Step>
+                <Step>
+                    <Name>SC-get-userinfo</Name>
+                </Step>
+                <Step>
+                    <Name>EV-set-userinfo</Name>
+                </Step>
+                <Step>
+                    <Name>RF-get-userinfo-fault</Name>
+                    <Condition>calloutUserInfoResponse.status.code != 200</Condition>
+                </Step>
+                <Step>
+                    <Name>AM-set-authorization_code-var</Name>
+                </Step>
+                <Step>
+                    <Name>OA-gen-authorization_code</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>OA-gen-access_token-authorization_code</Name>
+                </Step>
+                <Step>
+                    <Name>JS-refresh_token-body</Name>
+                </Step>
+                <!--
+                <Step>
+                    <Name>Populate-Cache-1</Name>
+                </Step>
+                -->
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST") and (request.formparam.grant_type = "authorization_code")</Condition>
+        </Flow>
+        <Flow name="token-client_credentials">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>KVM-get_configuration</Name>
+                </Step>
+                <Step>
+                    <Name>EV-set-client_credentials-param</Name>
+                </Step>
+                <Step>
+                    <Name>SC-get-token-client_credentials</Name>
+                </Step>
+                <Step>
+                    <Name>EV-get-client_credentials-var</Name>
+                </Step>
+                <Step>
+                    <Name>RF-client_credentials-fault</Name>
+                    <Condition>calloutResponse.status.code != 200</Condition>
+                </Step>
+                <Step>
+                    <Name>AM-set-client_credentials-var</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>OA-gen-access_token-client_credentials</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST") and (request.formparam.grant_type = "client_credentials")</Condition>
+        </Flow>
+        <Flow name="token-refresh_token">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>KVM-get_configuration</Name>
+                </Step>
+                <Step>
+                    <Name>EV-set-refresh_token-param</Name>
+                </Step>
+                <!-- 
+                <Step>
+                    <Name>Lookup-Cache-1</Name>
+                </Step>
+                -->
+                <!--                <Step>
+                    <Name>Raise-Fault-1</Name>
+                    <Condition>idpRefreshToken is null</Condition>
+                </Step> -->
+                <Step>
+                    <Name>SC-refresh_token</Name>
+                </Step>
+                <Step>
+                    <Name>EV-get-refresh_token-var</Name>
+                </Step>
+                <Step>
+                    <Name>RF-refresh_token_fault</Name>
+                    <Condition>calloutResponse.status.code != 200</Condition>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>OA-refresh_token</Name>
+                </Step>
+                <Step>
+                    <Name>JS-refresh_token-body</Name>
+                </Step>
+                <!--
+                <Step>
+                    <Name>Populate-Cache-1</Name>
+                </Step>
+                -->
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST") and (request.formparam.grant_type = "refresh_token")</Condition>
+        </Flow>
+    </Flows>
+    <HTTPProxyConnection>
+        <BasePath>/v1/oauth2</BasePath>
+        <Properties/>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="NoRoute"/>
+</ProxyEndpoint>
